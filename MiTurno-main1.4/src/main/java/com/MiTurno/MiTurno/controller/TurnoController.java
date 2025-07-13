@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Turno", description = "Operaciones sobre turnos")
 @RestController
-@RequestMapping("/api/v1/turno")
+@RequestMapping("/api/v1/turnos")
 public class TurnoController {
 
     @Autowired

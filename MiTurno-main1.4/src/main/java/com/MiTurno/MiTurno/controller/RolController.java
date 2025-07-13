@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Rol", description = "Operaciones sobre roles de usuario")
 @RestController
-@RequestMapping("/api/v1/rol")
+@RequestMapping("/api/v1/roles")
 public class RolController {
 
     @Autowired

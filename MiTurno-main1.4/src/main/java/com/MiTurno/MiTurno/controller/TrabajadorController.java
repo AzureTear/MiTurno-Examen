@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Trabajador", description = "Operaciones sobre trabajadores")
 @RestController
-@RequestMapping("/api/v1/trabajador")
+@RequestMapping("/api/v1/trabajadores")
 public class TrabajadorController {
 
     @Autowired

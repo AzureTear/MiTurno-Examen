@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Institución", description = "Operaciones sobre instituciones")
 @RestController
-@RequestMapping("/api/v1/institucion")
+@RequestMapping("/api/v1/instituciones")
 public class InstitucionController {
 
     @Autowired

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Configuración", description = "Operaciones sobre parámetros de configuración")
 @RestController
-@RequestMapping("/api/v1/configuracion")
+@RequestMapping("/api/v1/configuraciones")
 public class ConfiguracionController {
 
     @Autowired

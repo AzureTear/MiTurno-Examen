@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Módulo", description = "Operaciones sobre módulos")
 @RestController
-@RequestMapping("/api/v1/modulo")
+@RequestMapping("/api/v1/modulos")
 public class ModuloController {
 
     @Autowired
