@@ -85,7 +85,7 @@ public class InstitucionController {
     @Operation(summary = "Eliminar una institución por ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        institucionService.delete(id);
+        institucionService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

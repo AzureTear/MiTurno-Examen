@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.MiTurno.MiTurno.model.Trabajador;
 import com.MiTurno.MiTurno.repository.TrabajadorRepository;
 import jakarta.transaction.Transactional;
@@ -13,6 +14,7 @@ import jakarta.transaction.Transactional;
 public class TrabajadorService {
     @Autowired
     private TrabajadorRepository trabajadorRepository;
+
 
     public List<Trabajador> findAll(){
         return trabajadorRepository.findAll();
@@ -49,7 +51,6 @@ public class TrabajadorService {
         }
     }
 
-
     public List<Trabajador> getRolAdminAndSucursalCapacidadMaximaGreaterThan(Boolean admin, Integer capacidadMaxima) {
         return trabajadorRepository.findByRolAdminAndSucursalCapacidadMaximaGreaterThan(admin,capacidadMaxima);
     }
@@ -61,4 +62,5 @@ public class TrabajadorService {
         }
         return null;
     }
+
 }

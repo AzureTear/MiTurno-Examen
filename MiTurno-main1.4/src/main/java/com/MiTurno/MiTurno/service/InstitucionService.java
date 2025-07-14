@@ -6,8 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.MiTurno.MiTurno.model.Institucion;
+import com.MiTurno.MiTurno.model.Sucursal;
 import com.MiTurno.MiTurno.repository.InstitucionRepository;
-
+import com.MiTurno.MiTurno.repository.SucursalRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -15,6 +16,11 @@ import jakarta.transaction.Transactional;
 public class InstitucionService {
     @Autowired
     private InstitucionRepository institucionRepository;
+    @Autowired
+    private SucursalService sucursalService;
+
+    @Autowired
+    private SucursalRepository sucursalRepository;
 
     public List<Institucion> findAll(){
         return institucionRepository.findAll();
@@ -48,7 +54,17 @@ public class InstitucionService {
         }
     }
 
-    public void delete(Long id){
-        institucionRepository.deleteById(id);
-    }
+
+    public void deleteById(Long id){
+        Institucion institucion = institucionRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Institucion no encontrada"));
+            
+        List<Sucursal> sucursals = sucursalRepository.findByInstitucion(institucion);
+
+        for (Sucursal sucursal : sucursals ) {
+            sucursalService.delete(Long.valueOf(sucursal.getId()));
+        }
+
+        institucionRepository.delete(institucion);
+}
 }

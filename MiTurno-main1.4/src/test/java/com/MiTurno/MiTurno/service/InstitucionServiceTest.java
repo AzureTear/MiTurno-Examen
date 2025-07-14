@@ -69,7 +69,7 @@ public class InstitucionServiceTest {
     @Test
     public void testDeleteById() {
         doNothing().when(institucionRepository).deleteById(1L);
-        institucionService.delete(1L);
+        institucionService.deleteById(1L);
         verify(institucionRepository, times(1)).deleteById(1L);
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.MiTurno.MiTurno.model.Sucursal;
 import com.MiTurno.MiTurno.repository.SucursalRepository;
+import com.MiTurno.MiTurno.repository.TrabajadorRepository;
+import com.MiTurno.MiTurno.repository.TurnoRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -20,6 +22,12 @@ public class SucursalService {
     @Autowired
     private SucursalRepository sucursalRepository;
 
+    @Autowired
+    private TrabajadorRepository trabajadorRepository;
+
+    @Autowired
+    private TurnoRepository turnoRepository;
+
     public List<Sucursal> findAll(){
         return sucursalRepository.findAll();
     }
@@ -28,9 +36,6 @@ public class SucursalService {
         return sucursalRepository.findById(id).orElse( null);
     }
 
-    public void delete(Long id){
-        sucursalRepository.deleteById(id);
-    }
 
     public Sucursal save(Sucursal institucion) {
         return sucursalRepository.save(institucion);
@@ -84,5 +89,12 @@ public class SucursalService {
         }
         return null;
     }
-    
+    public void delete(Long id) {
+        Sucursal sucursal = sucursalRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Sucursal no encontrado"));
+
+        turnoRepository.deleteBySucursal(sucursal);
+        trabajadorRepository.deleteBySucursal(sucursal);
+        sucursalRepository.delete(sucursal);
+    }
 }

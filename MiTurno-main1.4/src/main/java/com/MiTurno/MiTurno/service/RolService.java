@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.MiTurno.MiTurno.model.Rol;
+import com.MiTurno.MiTurno.model.Trabajador;
 import com.MiTurno.MiTurno.repository.RolRepository;
+import com.MiTurno.MiTurno.repository.TrabajadorRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +18,12 @@ import jakarta.transaction.Transactional;
 public class RolService {
     @Autowired
     private RolRepository rolRepository;
+
+    @Autowired
+    private RolService rolService;
+
+    @Autowired
+    private TrabajadorRepository trabajadorRepository;
 
     public List<Rol> findAll(){
         return rolRepository.findAll();
@@ -49,5 +57,18 @@ public class RolService {
         } else {
             return null; 
         }
-    }    
+    }  
+
+    public void deleteById(Long id){
+        Rol rol = rolRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Rol no encontrada"));
+
+            List<Trabajador> trabajadores = trabajadorRepository.findByRol(rol);
+
+        for (Trabajador trabajador: trabajadores) {
+            rolService.delete(Long.valueOf(trabajador.getId()));
+        }
+
+        rolRepository.delete(rol);
+}
 }

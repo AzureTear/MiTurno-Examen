@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.MiTurno.MiTurno.model.Sucursal;
 import com.MiTurno.MiTurno.model.Turno;
+import com.MiTurno.MiTurno.model.Usuario;
 
 @Repository
 public interface TurnoRepository extends JpaRepository<Turno, Long>{
@@ -40,4 +42,11 @@ public interface TurnoRepository extends JpaRepository<Turno, Long>{
 
     List<Turno> findByFechaBetween(Date horaCreacion, Date horaAtencion);
 
+    void deleteByUsuario(Usuario usuario);
+
+    List<Turno> findByUsuario(Usuario usuario);
+
+    void deleteBySucursal(Sucursal sucursal);
+
+    List<Turno> findBySucursal(Sucursal sucursal);
 }

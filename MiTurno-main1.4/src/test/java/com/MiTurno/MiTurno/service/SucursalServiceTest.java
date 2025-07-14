@@ -76,4 +76,15 @@ public class SucursalServiceTest {
         sucursalService.delete(1L);
         verify(sucursalRepository, times(1)).deleteById(1L);
     }
+
+
+    @Test
+    public void testFindByInstitucionNombre(){
+        when(sucursalRepository.findByInstitucionNombre("Anderson LLC")).thenReturn(List.of(createSucursal()));
+        List<Sucursal> sucursal = sucursalService.findByInstitucionNombre("Anderson LLC");
+        assertNotNull(sucursal);
+        assertEquals(1, sucursal.size());
+    }
+
+
 }

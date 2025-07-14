@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.MiTurno.MiTurno.model.Usuario;
+import com.MiTurno.MiTurno.repository.TurnoRepository;
 import com.MiTurno.MiTurno.repository.UsuarioRepository;
 
 import jakarta.transaction.Transactional;
@@ -16,7 +17,11 @@ import jakarta.transaction.Transactional;
 public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
-        public List<Usuario> findAll(){
+
+    @Autowired
+    private TurnoRepository turnoRepository;
+
+    public List<Usuario> findAll(){
         return usuarioRepository.findAll();
     }
 
@@ -24,9 +29,7 @@ public class UsuarioService {
         return usuarioRepository.findById(id).orElse( null);
     }
     
-    public void delete(Long id){
-        usuarioRepository.deleteById(id);
-    }
+
 
     public Usuario save(Usuario usuario) {
         return usuarioRepository.save(usuario);
@@ -62,5 +65,11 @@ public class UsuarioService {
         }
     }
 
+    public void delete(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
+        turnoRepository.deleteByUsuario(usuario);
+        usuarioRepository.delete(usuario);
+    }
 }

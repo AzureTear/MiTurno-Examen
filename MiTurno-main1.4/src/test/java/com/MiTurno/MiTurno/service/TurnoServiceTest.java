@@ -89,4 +89,22 @@ public class TurnoServiceTest {
         turnoService.delete(1L);
         verify(turnoRepository, times(1)).deleteById(1L);
     }
+
+
+    @Test
+    public void testFindByUsuarioNombre() {
+        when(turnoRepository.findByUsuarioNombre("Pedro")).thenReturn(List.of(createTurno()));
+        List<Turno> turnos = turnoService.findByUsuarioNombre("Pedro");
+        assertNotNull(turnos);
+        assertEquals(1, turnos.size());
+    }
+
+    @Test
+    public void testFindByDescripcionAndEstado() {
+        when(turnoRepository.findByDescripcionAndEstado("Pedro","Modulo A")).thenReturn(List.of(createTurno()));
+        List<Turno> turnos = turnoService.findByDescripcionAndEstado("Pedro","Modulo A");
+        assertNotNull(turnos);
+        assertEquals(1, turnos.size());
+    }
+
 }

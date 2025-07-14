@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.MiTurno.MiTurno.model.Institucion;
 import com.MiTurno.MiTurno.model.Sucursal;
 
 @Repository
@@ -41,6 +42,8 @@ public interface SucursalRepository extends JpaRepository<Sucursal, Long>{
         """)
     List<Sucursal> findByInstitucionNombre(@Param("instiNombre") String instiNombre);
 
+    List<Sucursal> findByInstitucion(Institucion institucion);
 
+    Void deleteByInstitucion(Institucion institucion);
 
 }

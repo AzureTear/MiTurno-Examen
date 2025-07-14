@@ -84,7 +84,7 @@ public class RolController {
     @Operation(summary = "Eliminar un rol por ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        rolService.delete(id);
+        rolService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

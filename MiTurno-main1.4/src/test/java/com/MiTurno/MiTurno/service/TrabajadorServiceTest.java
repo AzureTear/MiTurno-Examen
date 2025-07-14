@@ -78,4 +78,12 @@ public class TrabajadorServiceTest {
         trabajadorService.delete(1L);
         verify(trabajadorRepository, times(1)).deleteById(1L);
     }
+
+    @Test
+    public void testFindBySucursalId(){
+        when(trabajadorRepository.findBySucursalId(1)).thenReturn(List.of(createTrabajador()));
+        List<Trabajador> trabajadorBaratos = trabajadorService.findBySucursalId(1);
+        assertNotNull(trabajadorBaratos);
+        assertEquals(1, trabajadorBaratos.size());
+    }
 }

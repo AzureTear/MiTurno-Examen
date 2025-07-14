@@ -90,7 +90,7 @@ public class InstitucionControllerV2 {
         if (institucion == null) {
             return ResponseEntity.notFound().build();
         }
-        institucionService.delete(id);
+        institucionService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
